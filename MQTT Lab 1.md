@@ -5,9 +5,9 @@ This lab aims to offer you an hands-on experience with MQTT. You will perform ex
 
 # Block 0: the client
 
-For the experiment you will use the  (https://www.google.com/chrome/) and the MQTT Lens extension (https://chrome.google.com/webstore/search/mqttlens)
+For the experiment you will use the Chrome browser (https://www.google.com/chrome/) and the MQTT Lens extension (https://chrome.google.com/webstore/search/mqttlens)
 
-Once installed both you'll get something like this:
+Once installed both, you'll get something like this:
 ![MQTT Lens splash](https://i.imgur.com/bgKxDlb.png)
 
 # Block 1: Connecting to a public broker
@@ -23,85 +23,55 @@ In this session we will use a public broker. There are various public brokers in
         * http://www.mqtt-dashboard.com/
         
 we will always access them through port `1883`. 
+Let's create a connection to one of these broker using MQTTlens. 
 
-Let's create a connection to one of these broker. 
+Click on the `+` sign on the top left part of the MQTT Lens window and insert the information indicated in the red rectangles. Then click on the ``Generate a random ID`` botton (actually you can insert whatever name you like in the ``Client ID`` field)
 
-Click on the `+` sign on the top left part of the MQTT Lens window and add insert the following information
+![](https://i.imgur.com/nTUf8gD.png)
 
-![](https://i.imgur.com/XZsDyvF.png)
-
-Click on "CREATE CONNECTION" and you are done!
+Click now on the ``CREATE CONNECTION`` at the bottom of this window,  and if you get something like the image below, than you are connected to the ``iot.eclipse.org`` broker.
 
 ![](https://i.imgur.com/fQwCVmk.png)
 
+### ... about Keepalive
 
 
 # Block 2: some basic exercise
 
-To perfom the following exercise some of you have to act as a "publisher" and some of you as a "Subscriber"
+Let's start with a easy one. In the ``topic`` field of the Subscribe section write ``i/LOVE/Python`` and then click on the ``SUBSCRIBE`` button. The broker will register your subscription request.
 
-.....
+![](https://i.imgur.com/xL8YB8e.png)
 
-Let's start with a easy one. In one of the small terminals write:
-```shell
-mosquitto_sub -t i/LOVE/Python
-```
-the broker terminal should show something like:
+Now, in the ``topic`` field of the Pubish section write the same **identical** text for the topic (i.e., ``i/LOVE/Python``) and in the ``Message`` field write a text, whatever you want, like: ``Lecco is a beautiful city in Italy`` and click on the ``PUBLISH`` button.
 
-![](https://i.imgur.com/5nMOywi.png)
+You'll get something like the image below... plus all the messages written by all the other clients in the room.
+![](https://i.imgur.com/MqORa3r.png)
 
-the broker registered the subscription request of the new client. Now in the other small terminal, execute:
-```shell
-mosquitto_pub -t i/LOVE/Python -m "Very well."
-```
-in the broker terminal, after the new registration messages, you'll also see something like:
+> You can control the number of message that appear in the window using the + and - signs: ![](https://i.imgur.com/eaLtRBO.png =200x50)
 
-![](https://i.imgur.com/s7zROiH.png)
+With just one publish action you actually reached various devices!!
 
-meaning that the broker received the published message and that it forwarded it to the subscribed client. In the terminal where `mosquitto_sub` is executing you'll see the actual message appear.
-
-Try now: 
-```shell
-mosquitto_pub -t i/love/python -m "Not so well"
-```
-**What happened? Are topics case-sensitive?**
-
-Another useful option of `mosquitto_pub` is `-l`. Execute the following command:
-```shell
-mosquitto_pub -t i/LOVE/Python -l
-```
-and start typing some line of text. It sends messages read from stdin, splitting separate lines into separate messages. Note that blank lines won't be sent. You basically obtained a MQTT based **"unidirectional chat"** channel... 
-
-### ... about Keepalive
-By the way, if you kept the broker running with the `-v` option until now in a separate window, you can see various lines like:
-```
-1524673958: Sending PINGRESP to mosqpub|3592-iMac-de-Pi
-1524673985: Received PINGREQ from mosqsub|3587-iMac-de-Pi
-```
-this simply shows that the broker and the client are interchanging these special messages to know whether they are still alive.
+Write now in the ``topic`` field of the Pubish section the text: ``i/love/python``, that is all lowercase,  and in the ``Message`` field write a text, whatever you want, and click on the ``PUBLISH`` button.
+**What happened? Did you receive any message? Are topics case-sensitive?**
 
 
 ### QoS (Quality of Service):
-Adding the `-q` option, for example to the `mosquitto_pub` you'll see the extra message that are now interchanged with the broker. For example, doing:
-```shell
-mosquitto_pub -t i/LOVE/Python -q 2 -m testing
-```
 
-you'll get:
-
-![](https://i.imgur.com/wLqMrev.png)
-
-compare this sequence of messages with the one obtained with `-q 0` or with `-q 1`.
+VOID
 
 ### Retained messages:
-Normally if a publisher publishes a message to a topic, and *no one is subscribed* to that topic the message is simply discarded by the broker. If you want your broker to remember the last published message, you'll have to use the ```retain``` option. Only one message is retained per topic. The next message published on that topic replaces the retained message for that topic. 
-> To set the retain message flag you have to add `-r` using the Mosquitto clients.
+Normally if a publisher publishes a message to a topic, and *no one is subscribed* to that topic the message is simply discarded by the broker. If you want your broker to remember the last published message, you'll have to use the ``retained`` option.
+Only one message is retained per topic. The next message published on that topic replaces the retained message for that topic. 
+> With MQTTlens you have to click on the  ![](https://i.imgur.com/lJzRo1L.png =150x50) to set the retain message flag.
 
-So try the following cases, but  **remember now to always execute, for each test, the subscriber after** the publisher:
+So try the following cases, but  **remember now to always subscribe,  in each case, after** the publisher:
 1. Publish a message with the retain message flag not set, like we did before. What happens?
-1. Publish a message with the retain message flag set (`-r`). What happens?
-1. Publish several (different) messages with the retain message flag set before starting the subscriber. What happens?
+1. Publish a message with the retain message flag set. What happens?
+1. Publish several (different) messages with the retain message flag set before subscribing. What happens?
 2. Publish a message with the retain message flag **not** set again. What happens?
 
-Finally, how do I remove or delete a retained message? You have to publish a blank message(`-m ""`) with the retain flag set to true which clears the retained message. Try it.
+Finally, how do I remove or delete a retained message? You have to publish a blank message with the retain flag set to true. Try it.
 
+# Block 3: a final exercise
+
+Create groups of two or three devices. Now, using MQTTlens, create a very basic chat application, where all the messages published from any of the members  are received only by the members of the group
