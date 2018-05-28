@@ -47,7 +47,7 @@ Now, in the ``topic`` field of the Pubish section write the same **identical** t
 You'll get something like the image below... plus all the messages written by all the other clients in the room.
 ![](https://i.imgur.com/MqORa3r.png)
 
-> You can control the number of message that appear in the window using the + and - signs: ![](https://i.imgur.com/eaLtRBO.png =200x50)
+> You can control the number of message that appear in the window using the + and - signs: ![](https://i.imgur.com/eaLtRBO.png)
 
 With just one publish action you actually reached various devices!!
 
@@ -62,7 +62,7 @@ VOID
 ### Retained messages:
 Normally if a publisher publishes a message to a topic, and *no one is subscribed* to that topic the message is simply discarded by the broker. If you want your broker to remember the last published message, you'll have to use the ``retained`` option.
 Only one message is retained per topic. The next message published on that topic replaces the retained message for that topic. 
-> With MQTTlens you have to click on the  ![](https://i.imgur.com/lJzRo1L.png =150x50) to set the retain message flag.
+> With MQTTlens you have to click on the  ![](https://i.imgur.com/lJzRo1L.png) to set the retain message flag.
 
 So try the following cases, but  **remember now to always subscribe,  in each case, after** the publisher:
 1. Publish a message with the retain message flag not set, like we did before. What happens?
