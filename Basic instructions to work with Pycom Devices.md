@@ -13,25 +13,25 @@ You must have Python3 installed in your computer. Check here https://www.python.
 ![](https://i.imgur.com/SGbpW1r.png)
 
 ## Installing mpy-repl-tool
-mpy-repl-tool is a software tool that allows to connect and control a LoPy (http://mpy-repl-tool.readthedocs.io/en/latest/index.html). 
+mpy-repl-tool is the software tool that we will use to connect and control a LoPy (http://mpy-repl-tool.readthedocs.io/en/latest/index.html). 
 
 To install it you have to execute: 
 ```
 $ python3 -m pip install mpy-repl-tool
 ```
 
-## Basic guide to mpy-repl-tool
+## Getting started with mpy-repl-tool
 
 Plug-in your LoPy device in a USB port and wait a few seconds until the LED starts blinking in blue.
+***NOTE: If you are using an OS inside a virtual machine, remember to tell the host machine to associate the device with your VM***
+
 
 Then execute: `$ python3 -m there detect`
 This command will list the serial ports and "hopefully" :smiley: will automatically find your LoPy board.
 
-***NOTE: If you are using an OS inside a virtual machine, remember to tell the host machine to associate the device with your VM***
-
 OK, now you are ready to start!
 
-### Some usage examples
+## Some usage examples
 
 * to get a list of the files on the LoPy do: `$ python3 -m there ls -l /flash/*`
 for example:
