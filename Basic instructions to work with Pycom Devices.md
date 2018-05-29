@@ -46,7 +46,7 @@ $ python3 -m there ls -l /flash/*
 ```
 
 > The filesystem has ``/`` as the root directory and the available physical drives are accessible from here. They are:</br>
-> ``/flash`` – the internal flash filesystem
+> ``/flash`` – the internal flash filesystem</br>
 > ``/sd`` – the SD card (if it exists)
 
 * read the contents of a file on the LoPy:
