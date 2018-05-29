@@ -34,11 +34,11 @@ $ python3 -m there ls -l /flash/*
 ----------    0    0     34B 1980-01-01 01:09:16 /flash/main.py
 ----------    0    0     29B 1980-01-01 01:09:18 /flash/boot.py
 ```
-:::info
-The filesystem has / as the root directory and the available physical drives are accessible from here. They are currently:
-/flash – the internal flash filesystem
-/sd – the SD card (if it exists)
-:::
+
+> The filesystem has ``/`` as the root directory and the available physical drives are accessible from here. They are currently:
+> /flash – the internal flash filesystem
+> /sd – the SD card (if it exists)
+
 * read the contents of a file on the LoPy:
 ```python3 -m there cat /flash/somefile```
 
@@ -91,9 +91,8 @@ flash_led_to(RED)
 flash_led_to(YELLOW)
 set_led_to(OFF)   
 ```
-:::info
-Hint: save the code in a file named "test.py" for example and, in the REPL console, write ```import test```
-:::
+
+**Hint: save the code in a file named "test.py" for example and, in the REPL console, write ```import test```**
 
 ---
 ---
