@@ -72,3 +72,11 @@ So try to repeat all the previous steps with your own device and variable.
 
 Using as a reference the code of the previous step, create a MicroPython periodic publisher that sends the generated number from your LoPy to your Ubidots device.
 
+## Third step: creating dashbord elements.
+
+Go to the Dashboard section and add new widget associated with the variable of your device.
+![](https://i.imgur.com/YDQBZ4z.png)
+
+See the alternatives you have and how they can be configured.
+
+
