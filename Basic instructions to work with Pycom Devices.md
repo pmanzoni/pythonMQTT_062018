@@ -23,7 +23,8 @@ $ python3 -m pip install mpy-repl-tool
 ## Getting started with mpy-repl-tool
 
 Plug-in your LoPy device in a USB port and wait a few seconds until the LED starts blinking in blue.
-***NOTE: If you are using an OS inside a virtual machine, remember to tell the host machine to associate the device with your VM***
+
+_NOTE: If you are using an OS inside a virtual machine, remember to tell the host machine to associate the device with your VM_
 
 
 Then execute: `$ python3 -m there detect`
