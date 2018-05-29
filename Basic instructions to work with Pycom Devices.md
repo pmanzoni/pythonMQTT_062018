@@ -27,7 +27,10 @@ Plug-in your LoPy device in a USB port and wait a few seconds until the LED star
 _NOTE: If you are using an OS inside a virtual machine, remember to tell the host machine to associate the device with your VM_
 
 
-Then execute: `$ python3 -m there detect`
+Then execute: 
+```
+$ python3 -m there detect
+```
 This command will list the serial ports and "hopefully" :smiley: will automatically find your LoPy board.
 
 OK, now you are ready to start!
