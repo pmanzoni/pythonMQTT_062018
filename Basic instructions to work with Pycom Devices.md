@@ -19,9 +19,8 @@ Installing the software required to connect to the LoPy device. We will use this
 
 Then execute: `$ python3 -m there detect`
 This command will list the serial ports and "hopefully" :smiley: will automatically find your LoPy board.
-:::info
-NOTE: If you are using an OS inside a virtual machine, remember to tell the host machine to associate the device with your VM
-:::
+
+***NOTE: If you are using an OS inside a virtual machine, remember to tell the host machine to associate the device with your VM***
 
 OK, now you are ready to start!
 
@@ -36,10 +35,8 @@ $ python3 -m there ls -l /flash/*
 ```
 
 > The filesystem has ``/`` as the root directory and the available physical drives are accessible from here. They are currently:
-
-> /flash – the internal flash filesystem
-
-> /sd – the SD card (if it exists)
+> ``/flash`` – the internal flash filesystem
+> ``/sd`` – the SD card (if it exists)
 
 * read the contents of a file on the LoPy:
 ```python3 -m there cat /flash/somefile```
