@@ -33,7 +33,12 @@ Click now on the ``CREATE CONNECTION`` at the bottom of this window,  and if you
 
 ![](https://i.imgur.com/fQwCVmk.png)
 
-### ... about Keepalive
+As you can seen, in the Connection creation window there are various other fields that let you specify:
+* the frequency of the Keep-alive timer (typically 60 seconds or 120 seconds)
+* the username and password; we will use these fields in the next lab session
+* the Last-will information
+
+![](https://i.imgur.com/cFYtFTB.png)
 
 
 # Block 2: some basic exercise
@@ -44,20 +49,16 @@ Let's start with a easy one. In the ``topic`` field of the Subscribe section wri
 
 Now, in the ``topic`` field of the Pubish section write the same **identical** text for the topic (i.e., ``i/LOVE/Python``) and in the ``Message`` field write a text, whatever you want, like: ``Lecco is a beautiful city in Italy`` and click on the ``PUBLISH`` button.
 
-You'll get something like the image below... plus all the messages written by all the other clients in the room.
+You'll get something like the image below... **plus all the messages written by all the other clients in the room.** With just one publish action you actually reached various devices!!
 ![](https://i.imgur.com/MqORa3r.png)
 
 > You can control the number of message that appear in the window using the + and - signs: ![](https://i.imgur.com/eaLtRBO.png)
 
-With just one publish action you actually reached various devices!!
+### Are topics case-sensitive?
 
 Write now in the ``topic`` field of the Pubish section the text: ``i/love/python``, that is all lowercase,  and in the ``Message`` field write a text, whatever you want, and click on the ``PUBLISH`` button.
-**What happened? Did you receive any message? Are topics case-sensitive?**
+**What happened? Did you receive any message?**
 
-
-### QoS (Quality of Service):
-
-VOID
 
 ### Retained messages:
 Normally if a publisher publishes a message to a topic, and *no one is subscribed* to that topic the message is simply discarded by the broker. If you want your broker to remember the last published message, you'll have to use the ``retained`` option.
