@@ -45,7 +45,7 @@ $ python3 -m there ls -l /flash/*
 ----------    0    0     29B 1980-01-01 01:09:18 /flash/boot.py
 ```
 
-> The filesystem has ``/`` as the root directory and the available physical drives are accessible from here. They are currently:
+> The filesystem has ``/`` as the root directory and the available physical drives are accessible from here. They are:</br>
 > ``/flash`` – the internal flash filesystem
 > ``/sd`` – the SD card (if it exists)
 
