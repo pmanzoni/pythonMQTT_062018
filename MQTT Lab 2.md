@@ -70,7 +70,9 @@ So try to repeat all the previous steps with your own device and variable.
 
 ## Second step: sending data from a LoPy with the PySense board.
 
-Using as a reference the code of the previous step, create a MicroPython periodic publisher that sends the generated number from your LoPy to your Ubidots device.
+Using as a reference the information of the previous step, create a MicroPython periodic publisher that sends some values sensed with your  PySense to a specifically created variable in your Ubidots device.
+
+Use as a reference the code examples in the directory https://github.com/pmanzoni/pythonMQTT_062018/tree/master/code
 
 ## Third step: creating dashbord elements.
 
