@@ -1,21 +1,28 @@
 # Basic instructions to work with Pycom Devices
 
-This document describes (1) the basic information required to set up a development environment and (2) the programming workflow for a Pycom device, in our case the LoPys. 
+This document describes: 
+
+1. the basic information required to set up a development environment, and 
+2. the programming workflow for a Pycom device, in our case the LoPys. 
 
 The main goal is to gain access to the REPL. REPL stands for Read Evaluate Print Loop, and is the name given to the interactive MicroPython prompt that is accessible on the Pycom Devices. Using the REPL is by far the easiest way to test out python code and run commands. 
+More infos about REPL can be found here: https://docs.pycom.io/chapter/gettingstarted/programming/repl/
 
-More infos here: https://docs.pycom.io/chapter/gettingstarted/programming/repl/
-
-## Step 1
-You first need to have Python 3 installed in your computer. Check here for the proper instructions and code: https://www.python.org/download/releases/3.0/
+You must have Python3 installed in your computer. Check here https://www.python.org/download/releases/3.0/  for the proper instructions and code.
 
 ![](https://i.imgur.com/SGbpW1r.png)
 
-## Step 2
-Installing the software required to connect to the LoPy device. We will use this tool: http://mpy-repl-tool.readthedocs.io/en/latest/index.html. To install it you have to execute: 
-```$ python3 -m pip install mpy-repl-tool```
+## Installing mpy-repl-tool
+mpy-repl-tool is a software tool that allows to connect and control a LoPy (http://mpy-repl-tool.readthedocs.io/en/latest/index.html). 
 
-**Now plug-in your LoPy device in a USB port and wait a few seconds until the LED starts blinking in blue.**
+To install it you have to execute: 
+```
+$ python3 -m pip install mpy-repl-tool
+```
+
+## Basic guide to mpy-repl-tool
+
+Plug-in your LoPy device in a USB port and wait a few seconds until the LED starts blinking in blue.
 
 Then execute: `$ python3 -m there detect`
 This command will list the serial ports and "hopefully" :smiley: will automatically find your LoPy board.
