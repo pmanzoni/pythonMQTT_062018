@@ -1,8 +1,9 @@
-# MQTT Lab 3
+# Lab 3
 
-The Things Networks. This Lab session will guide you through working with The Things Networks to send sensor data over LoRa to an application.
+This Lab session will guide you through working with **The Things Networks** to send sensor data over LoRa to an application.
 
 
+# Step 1
 ## Register with The Things Network
 
 Manage your applications and devices via [The Things Network Console](https://console.thethingsnetwork.org/).
@@ -22,8 +23,8 @@ Add your first The Things Network Application.
 
 1.  In the [Console](https://console.thethingsnetwork.org/), click [add application](https://console.thethingsnetwork.org/applications/add)
 
-	* For **Application ID**, choose a unique ID of lower case, alphanumeric characters and nonconsecutive `-` and `_` (e.g. `hi-world`).
-	* For **Description**, enter anything you like (e.g. `Hi, World!`).
+* For **Application ID**, choose a unique ID of lower case, alphanumeric characters and nonconsecutive `-` and `_` (e.g. `hi-world`).
+* For **Description**, enter anything you like (e.g. `Hi, World!`).
 
 
 ![](https://i.imgur.com/olUsZ5p.png)
@@ -50,7 +51,7 @@ The Things Network supports the two LoRaWAN mechanisms to register devices: Over
 
 
 * As **Device ID**, choose a unique ID (for this application) of lower case, alphanumeric characters and nonconsecutive `-` and `_` (e.g., `my-device1`).
-* As **Device EUI**, click the **randomize** button. 
+* As **Device EUI**, you have to use the value you get by executing in your LoPy the code in GitHub directory [code/getdevEUI.py](https://github.com/pmanzoni/pythonMQTT_062018/blob/master/code/getdevEUI.py)
 
 ![](https://i.imgur.com/HccYe7q.png)
 
@@ -74,3 +75,11 @@ The Things Network supports the two LoRaWAN mechanisms to register devices: Over
     You will be redirected to the device, where you can find the **Device Address**, **Network Session Key** and **App Session Key** that we'll need next.
     
 ![](https://i.imgur.com/Ci9SGoC.png)
+
+
+# Step 2
+
+Sending data 
+
+# Step 3
+Collecting data using MQTT
