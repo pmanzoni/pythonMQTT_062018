@@ -1,4 +1,4 @@
-# MQTT Lab 2
+# Lab 2
 
 In this lab you will experiment about how MQTT can be used to send data to a cloud based platform. This procedure allows you to store your data in a cloud based repository and to analyze your data with software tools made available by the used platform.
 
