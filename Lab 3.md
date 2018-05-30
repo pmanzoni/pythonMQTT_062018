@@ -79,7 +79,91 @@ The Things Network supports the two LoRaWAN mechanisms to register devices: Over
 
 # Step 2
 
-Sending data 
+In this step we will use the device (the LoPy plus the PySense) registered in the step before to periodically send the sensed temperature, humidity and luminosity (lux). You will have to upload all the code in the directory [codcode/lab3_wpysense/](https://github.com/pmanzoni/pythonMQTT_062018/tree/master/code/lab3_wpysense)  **except** file `ttn_decode_thl.txt`.
+
+First, clean the `/flash` memory of you device and  open for edit file `main.py`, and go to section:
+```shell=python
+...
+# SET HERE THE VALUES OF YOUR APP AND DEVICE
+THE_APP_EUI = 'VOID'
+THE_APP_KEY = 'VOID'
+...
+``` 
+and insert the proper values for your app and device. **Now, upload all the code to your LoPy.**
+
+When you power up your device, file `main.py` should start executing automatically. If it doesn't send a Ctrl-D or push the soft-reset button.
+
+In the LoPy terminal you will see something like:
+```
+Device LoRa MAC: b'70b3d.....a6c64'
+Joining TTN
+LoRa Joined
+Read sensors: temp. 30.14548 hum. 57.33438 lux: 64.64554
+Read sensors: temp. 30.1562 hum. 57.31149 lux: 64.64554
+...
+```
+
+Now, go in the Data section of your TTN application. You will see:
+![](https://i.imgur.com/1D3xNEx.png)
+The first line in the bottom is the message that represents the conection establishment and the other lines the incoming data.
+
+If you click on any of the lines of the data, you'll get:
+
+![](https://i.imgur.com/Dsaep1W.png)
+
+where you can find a lot of information regarding the sending of you LoRa message.
+
+If you check the Payload field, you will see a sequence of bytes... and that is actually what we sent :smile: 
+
+To see what we actually sent, open once againg the file `main.py`, and go to section:
+
+```shell=python
+...
+while True:
+    # create a LoRa socket
+    s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
+    s.setsockopt(socket.SOL_LORA, socket.SO_DR, 0)
+    s.setblocking(True)
+
+    temperature = tempHum.temp()
+    humidity = tempHum.humidity()
+    luxval = raw2Lux(ambientLight.lux())
+
+    print("Read sensors: temp. {} hum. {} lux: {}".format(temperature, humidity, luxval))
+
+    # Packing sensor data as byte sequence using 'struct'
+    # Data is represented as 3 float values, each of 4 bytes, 
+    #    byte orde 'big-endian'
+    # for more infos: https://docs.python.org/3.6/library/struct.html
+    payload = struct.pack(">fff", temperature, humidity, luxval)
+
+    s.send(payload)
+
+    time.sleep(15)
+``` 
+
+As you can see we are basically sending every 15 seconds the values of temperature, humidity and luminosity (lux) "compressed" as a sequence of 4*3= 12 bytes (:arrow_right: ``... = struct.pack(">fff",...``).
+
+Now, to allow TTN to interpret these sequence of bytes we have to go the the section **Payload Format** and insert the code in file `ttn_decode_thl.txt` as is:
+
+![](https://i.imgur.com/BsN17lI.png)
+
+**IMPORTANT: remember to click on the "save payload function" button at the bottom of this window**
+
+Go back to the Data window in TTN and start again you LoPy.
+
+You will see that now even lines show some more infos:
+
+![](https://i.imgur.com/q9vKiLX.png)
+
+and if you clock on any of the lines you will see:
+![](https://i.imgur.com/HFR9jQa.png)
+
+that is, the data in readable format.
+
+
+
+
 
 # Step 3
-Collecting data using MQTT
+TTN does not store the incoming data for a long time. If we want to keep these data, process it and visualize it, we need to use another platform... like for example Ubidots. In this step we will collect data from TTN and send it to Ubidots using MQTT.
