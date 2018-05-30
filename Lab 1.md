@@ -1,4 +1,4 @@
-# MQTT Lab 1
+# Lab 1
 
 This lab aims to offer you an hands-on experience with MQTT. You will perform experiments that will allow you to learn how to "publish" data and "subscribe" to get data. 
 
