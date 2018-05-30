@@ -17,9 +17,6 @@ from raw2lux import raw2Lux             # ... additional library for the light s
 # SET HERE THE VALUES OF YOUR APP AND DEVICE
 THE_APP_EUI = 'VOID'
 THE_APP_KEY = 'VOID'
-# 30may2018/PM device pysense2(brida amarilla)
-THE_APP_EUI = '70B3D57ED000EF35'
-THE_APP_KEY = 'B5614E2A0EE0EB4254AB8BC7465DE54E'
 
 
 def join_lora(force_join = False):
