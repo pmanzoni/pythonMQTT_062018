@@ -30,7 +30,6 @@ def join_lora(force_join = False):
     if not lora.has_joined() or force_join == True:
 
         # create an OTA authentication params
-        # 30may2018/PM device pysense2(brida amarilla)
         app_eui = binascii.unhexlify(THE_APP_EUI.replace(' ','')) # these settings can be found from TTN
         app_key = binascii.unhexlify(THE_APP_KEY.replace(' ','')) # these settings can be found from TTN
 
