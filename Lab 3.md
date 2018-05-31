@@ -166,4 +166,176 @@ that is, the data in readable format.
 
 
 # Step 3
-TTN does not store the incoming data for a long time. If we want to keep these data, process it and visualize it, we need to use another platform... like for example Ubidots. In this step we will collect data from TTN and send it to Ubidots using MQTT.
+TTN does not store the incoming data for a long time. If we want to keep these data, process  and visualize them, we need to use another platform... like for example Ubidots. In this step we will collect data from TTN and send it to Ubidots using MQTT.
+
+We will first of all write the code necessary to access TTN through MQTT and read the incoming data. 
+
+> All the details of the TTN MQTT API, can be found here: https://www.thethingsnetwork.org/docs/applications/mqtt/
+
+Using [Google Colab](https://colab.research.google.com/) execute the code below. The code is also available in the [GitHub repository](https://github.com/pmanzoni/pythonMQTT_062018/tree/master/code/lab3_subpub), filename = 'subTTN'.
+
+Remeber to first properly set the vales for the username (`TTN_USERNAME`) which is the **Application ID** and the 
+password (`TTN_PASSWORD`) which is the **Application Access Key**, in the bottom part of the _Overview_ section of the application window.
+![](https://i.imgur.com/zUmWrqP.png)
+
+
+```shell=python=
+!pip install paho-mqtt
+
+import sys
+import time
+import base64
+
+import json
+import struct
+
+import paho.mqtt.client as mqtt
+
+THE_BROKER = "eu.thethings.network"
+THE_TOPIC = "+/devices/+/up"
+
+# SET HERE THE VALUES OF YOUR APP AND DEVICE
+TTN_USERNAME = "VOID"
+TTN_PASSWORD = "VOID"
+
+# The callback for when the client receives a CONNACK response from the server.
+def on_connect(client, userdata, flags, rc):
+    print("Connected to ", client._host, "port: ", client._port)
+    print("Flags: ", flags, "return code: ", rc)
+
+    # Subscribing in on_connect() means that if we lose the connection and
+    # reconnect then subscriptions will be renewed.
+    client.subscribe(THE_TOPIC)
+
+# The callback for when a PUBLISH message is received from the server.
+def on_message(client, userdata, msg):
+
+    themsg = json.loads(str(msg.payload))
+    payload_raw = themsg["payload_raw"]
+    payload_plain = base64.b64decode(payload_raw)
+    print(payload_plain)
+
+    vals = struct.unpack(">fff", payload_plain)
+
+    print("Vals: temp. {} hum. {} lux: {}".format(vals[0], vals[1], vals[2]))
+
+
+
+client = mqtt.Client()
+
+# Let's see if you inserted the required data
+if TTN_USERNAME == 'VOID':
+    print("You must set the values of your app and device first!!")
+    sys.exit()
+client.username_pw_set(TTN_USERNAME, password=TTN_PASSWORD)
+
+client.on_connect = on_connect
+client.on_message = on_message
+
+client.connect(THE_BROKER, 1883, 60)
+
+client.loop_forever()
+````
+
+Now, with this code executing, **and your device generating data to TTN (as before)** you should start seeing data coming to your console:
+![](https://i.imgur.com/ZzqUpFU.png)
+
+
+What we have to do is:
+1. prepare Ubidots to receive our data
+2. modify the previous code to upload it to Ubidots automatically
+
+### phase 1: preparing Ubidots
+Go to Ubidots, and following the steps of Lab. 2, create a device with the following variables:
+![](https://i.imgur.com/3eWHvrn.png)
+
+
+Using [Google Colab](https://colab.research.google.com/) execute the code below. The code is also available in the [GitHub repository](https://github.com/pmanzoni/pythonMQTT_062018/tree/master/code/lab3_subpub), filename = 'subTTN_pubUBI'.
+
+Remember to first properly set the vales for `TTN_USERNAME`, `TTN_PASSWORD`, and `UBIDOTS_USERNAME`.
+
+
+```shell=python=
+import json
+import sys
+import time
+import base64
+import struct
+
+import paho.mqtt.client as mqtt
+
+TTN_BROKER = "eu.thethings.network"
+TTN_TOPIC = "+/devices/+/up"
+
+UBIDOTS_BROKER = "things.ubidots.com"
+
+# SET HERE THE VALUES OF YOUR APP AND DEVICE
+TTN_USERNAME = "VOID"
+TTN_PASSWORD = "VOID"
+UBIDOTS_USERNAME =  "VOID"
+
+
+# The callback for when the client receives a CONNACK response from the server.
+def on_connect_ttn(client, userdata, flags, rc):
+    print("Connected to ", client._host, "port: ", client._port)
+    print("Flags: ", flags, "return code: ", rc)
+
+    # Subscribing in on_connect() means that if we lose the connection and
+    # reconnect then subscriptions will be renewed.
+    client.subscribe(TTN_TOPIC)
+
+def on_connect_ubi(client, userdata, flags, rc):
+    print("Connected to ", client._host, "port: ", client._port)
+    print("Flags: ", flags, "return code: ", rc)
+
+def on_message_ttn(client, userdata, msg):
+
+    themsg = json.loads(str(msg.payload))
+    payload_raw = themsg["payload_raw"]
+    payload_plain = base64.b64decode(payload_raw)
+
+    vals = struct.unpack(">fff", payload_plain)
+
+    print("Vals: temp. {} hum. {} lux: {}".format(vals[0], vals[1], vals[2]))
+
+    # JSONining the values according to the Ubidots API indications 
+    payload = {"temperature": vals[0], "humidity": vals[1], "luxx": vals[2]}
+
+    client_ubi.connect(UBIDOTS_BROKER, 1883, 60)
+    client_ubi.loop_start()
+
+    client_ubi.publish("/v1.6/devices/pysense1", json.dumps(payload))
+
+    client_ubi.loop_stop()
+
+
+client_ttn = mqtt.Client()
+client_ubi = mqtt.Client()
+
+# Let's see if you inserted the required data
+if TTN_USERNAME == 'VOID':
+    print("\nYou must set the values of your app and device first!!\n")
+    sys.exit()
+client_ttn.username_pw_set(TTN_USERNAME, password=TTN_PASSWORD)
+
+# Let's see if you inserted the required data
+if UBIDOTS_USERNAME == 'VOID':
+    print("\nYou must set the values of Ubidots user first!!\n")
+    sys.exit()
+client_ubi.username_pw_set(UBIDOTS_USERNAME, password=None)
+
+client_ttn.on_connect = on_connect_ttn
+client_ubi.on_connect = on_connect_ubi
+client_ttn.on_message = on_message_ttn
+
+client_ttn.connect(TTN_BROKER, 1883, 60)
+
+client_ttn.loop_forever()
+````
+
+As you can see, the code connects to the two brokers, reads from the TTN broker the incoming data, adapts the format of the data to the Ubidots API, and then publish it to the Ubidots broker.
+
+Check in the Ubidots interface and you should see the incoming data. For example:
+
+![](https://i.imgur.com/YdKRwQD.png)
+
