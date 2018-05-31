@@ -14,8 +14,6 @@ Repository of the basic code to be used for the lab session on MQTT at the Kobe 
 ## June 14: 13:30-16:40
 - Intro to LoPy
 - Lab 2: Sending data via MQTT to Ubidots
-  - pub with MQTTLens
-  - pub with LoPy+PySense
 
 ## June 15: 13:30-16:40
 - Intro to LoRaWAN + TTN
