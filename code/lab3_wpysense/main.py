@@ -54,7 +54,7 @@ def join_lora(force_join = False):
     else:
         return True
 
-# Let's see if you inseeted the reuiqred data
+# Let's see if you inserted the required data
 if THE_APP_EUI == 'VOID':
 	print("You must set the values of your app and device first!!")
 	sys.exit()
