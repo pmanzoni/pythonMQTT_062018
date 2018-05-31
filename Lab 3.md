@@ -80,8 +80,7 @@ The Things Network supports the two LoRaWAN mechanisms to register devices: Over
 # Step 2
 
 In this step we will use the device (the LoPy plus the PySense) registered in the step before to periodically send the sensed temperature, humidity and luminosity (lux). You will have to upload all the code in the directory [codcode/lab3_wpysense/](https://github.com/pmanzoni/pythonMQTT_062018/tree/master/code/lab3_wpysense)  **except** file `ttn_decode_thl.txt`.
-
-First, clean the `/flash` memory of you device and  open for edit file `main.py`, and go to section:
+**First**, clean the `/flash` memory of you device and  open for edit file `main.py`, and go to section:
 ```shell=python
 ...
 # SET HERE THE VALUES OF YOUR APP AND DEVICE
@@ -91,9 +90,7 @@ THE_APP_KEY = 'VOID'
 ``` 
 and insert the proper values for your app and device. **Now, upload all the code to your LoPy.**
 
-When you power up your device, file `main.py` should start executing automatically. If it doesn't send a Ctrl-D or push the soft-reset button.
-
-In the LoPy terminal you will see something like:
+When you power up your device, file `main.py` should start executing automatically. If it doesn't send a Ctrl-D or push the soft-reset button. In the LoPy terminal you will see something like:
 ```
 Device LoRa MAC: b'70b3d.....a6c64'
 Joining TTN
@@ -117,7 +114,7 @@ If you check the Payload field, you will see a sequence of bytes... and that is 
 
 To see what we actually sent, open once againg the file `main.py`, and go to section:
 
-```shell=python
+```shell=python=
 ...
 while True:
     # create a LoRa socket
@@ -156,7 +153,7 @@ You will see that now even lines show some more infos:
 
 ![](https://i.imgur.com/q9vKiLX.png)
 
-and if you clock on any of the lines you will see:
+and if you click on any of the lines you will see:
 ![](https://i.imgur.com/HFR9jQa.png)
 
 that is, the data in readable format.
@@ -174,8 +171,7 @@ We will first of all write the code necessary to access TTN through MQTT and rea
 
 Using [Google Colab](https://colab.research.google.com/) execute the code below. The code is also available in the [GitHub repository](https://github.com/pmanzoni/pythonMQTT_062018/tree/master/code/lab3_subpub), filename = 'subTTN'.
 
-Remeber to first properly set the vales for the username (`TTN_USERNAME`) which is the **Application ID** and the 
-password (`TTN_PASSWORD`) which is the **Application Access Key**, in the bottom part of the _Overview_ section of the application window.
+Remember to first properly set the vales for the username (`TTN_USERNAME`) which is the **Application ID** and the password (`TTN_PASSWORD`) which is the **Application Access Key**, in the bottom part of the _Overview_ section of the application window.
 ![](https://i.imgur.com/zUmWrqP.png)
 
 
@@ -241,7 +237,7 @@ Now, with this code executing, **and your device generating data to TTN (as befo
 ![](https://i.imgur.com/ZzqUpFU.png)
 
 
-What we have to do is:
+What we have to do now is:
 1. prepare Ubidots to receive our data
 2. modify the previous code to upload it to Ubidots automatically
 
@@ -249,9 +245,9 @@ What we have to do is:
 Go to Ubidots, and following the steps of Lab. 2, create a device with the following variables:
 ![](https://i.imgur.com/3eWHvrn.png)
 
+### phase 2: modify the code 
 
 Using [Google Colab](https://colab.research.google.com/) execute the code below. The code is also available in the [GitHub repository](https://github.com/pmanzoni/pythonMQTT_062018/tree/master/code/lab3_subpub), filename = 'subTTN_pubUBI'.
-
 Remember to first properly set the vales for `TTN_USERNAME`, `TTN_PASSWORD`, and `UBIDOTS_USERNAME`.
 
 
