@@ -1,4 +1,4 @@
-# File: example4.py
+# File: example3.py
 #
 # A very  basic periodic producer
 
