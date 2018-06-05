@@ -1,43 +1,32 @@
-# File: example2.py
+# File: example1_w3.py
 #
-# A simple example of an MQTT subscriber.
-
-import sys
-import time
+# Version of example1 to be used with example3
 
 import paho.mqtt.client as mqtt
 
 THE_BROKER = "test.mosquitto.org"
 THE_TOPIC = "PMtest/rndvalue"
 
-def on_connect(mqttc, obj, flags, rc):
-    print("Connected to ", mqttc._host, "port: ", mqttc._port)
-    mqttc.subscribe(THE_TOPIC, 0)
+# The callback for when the client receives a CONNACK response from the server.
+def on_connect(client, userdata, flags, rc):
+    print("Connected to ", client._host, "port: ", client._port)
+    print("Flags: ", flags, "return code: ", rc)
 
-def on_message(mqttc, obj, msg):
-    print("Received ", msg.payload, "with topic ", msg.topic)
+    # Subscribing in on_connect() means that if we lose the connection and
+    # reconnect then subscriptions will be renewed.
+    client.subscribe(THE_TOPIC)
 
-def on_publish(mqttc, obj, mid):
-    print("mid: ", mid)
+# The callback for when a PUBLISH message is received from the server.
+def on_message(client, userdata, msg):
+    print(msg.topic+" "+str(msg.payload))
 
-def on_subscribe(mqttc, obj, mid, granted_qos):
-    print("Subscribed: ", mid, "granted QoS: ", granted_qos)
+client = mqtt.Client()
+client.on_connect = on_connect
+client.on_message = on_message
 
-def on_log(mqttc, obj, level, string):
-    print("log value:", string)
+client.connect(THE_BROKER, 1883, 60)
 
-# If you want to use a specific client id, use
-# mqttc = mqtt.Client("client-id")
-# but note that the client id must be unique on the broker. 
-# Leaving the client id parameter empty will generate a random id.
-mqttc = mqtt.Client()
-mqttc.on_message = on_message
-mqttc.on_connect = on_connect
-mqttc.on_publish = on_publish
-mqttc.on_subscribe = on_subscribe
-# Uncomment to enable debug messages
-# mqttc.on_log = on_log
+# Blocking call that processes network traffic, dispatches callbacks and
+# handles reconnecting.
+client.loop_forever()
 
-mqttc.connect(THE_BROKER, keepalive=60)
-
-mqttc.loop_forever()
