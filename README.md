@@ -9,7 +9,7 @@ Repository of the basic code to be used for the lab session on MQTT at the Kobe 
 
 ## June 13: 10:00-11:30
 - Intro MQTT: 45 min 
-- Lab 1: basic examples with MQTT
+- [Lab 1: basic examples with MQTT](https://hackmd.io/s/SySWKp2AM)
 
 ## June 14: 13:30-16:40
 - Intro to LoPy
