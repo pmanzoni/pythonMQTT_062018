@@ -13,8 +13,8 @@ Repository of the basic code to be used for the lab session on MQTT at the Kobe 
 
 ## June 14: 13:30-16:40
 - Intro to LoPy
-- [Lab 2: Sending data via MQTT to Ubidots](https://hackmd.io/s/Hke4Ya3Az)
+- [Lab 2: sending data via MQTT to Ubidots](https://hackmd.io/s/Hke4Ya3Az)
 
 ## June 15: 13:30-16:40
 - Intro to LoRaWAN + TTN
-- Lab 3: Producing data to TTN; processing data through Ubidots
+- [Lab 3: producing data to TTN; processing data through Ubidots](https://hackmd.io/s/ByuMvEnJ7)
