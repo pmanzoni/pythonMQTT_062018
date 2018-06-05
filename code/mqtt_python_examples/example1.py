@@ -30,5 +30,5 @@ client.connect(THE_BROKER, 1883, 60)
 # handles reconnecting.
 # Other loop*() functions are available that give a threaded interface and a
 # manual interface.
-#client.loop_forever()
+client.loop_forever()
 
