@@ -4,8 +4,9 @@ Repository of the basic code to be used for the lab session on MQTT at the Kobe 
 
 
 ## June 11: 10:00-11:30
-- Intro IoT: 45 min
-- Python bootcamp: 45 min
+- Intro IoT: 
+- Python bootcamp: 
+	* Python bootcamp exercises
 
 ## June 13: 10:00-11:30
 - [Intro to MQTT](https://github.com/pmanzoni/pythonMQTT_062018/blob/master/introMQTT_v1.pdf)
