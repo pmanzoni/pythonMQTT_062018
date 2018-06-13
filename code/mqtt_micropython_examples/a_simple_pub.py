@@ -8,9 +8,9 @@ import time
 import ufun
 
 wifi_ssid = 'THE_NAME_OF_THE_AP'
-wifi_passwd = ''
-broker_addr = 'iot.eclipse.org'
-dev_id = 'THE_NAME_OF_THE_DEVICE'
+wifi_passwd = 'THE_WIFI_PASSWORD'
+broker_addr = 'THE_NAME_OF_THE_BROKER'
+dev_id = 'NAME_YOUR_DEVICE'
 
 def settimeout(duration):
    pass
