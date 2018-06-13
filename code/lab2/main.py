@@ -17,6 +17,7 @@ import time
 wifi_ssid = 'THE_NAME_OF_THE_AP'
 wifi_passwd = 'THE_WIFI_PASSWORD'
 broker_addr = 'THE_NAME_OF_THE_BROKER'
+user_name = 'YOUR_UBIDOTS_USERNAME'
 dev_id = 'NAME_YOUR_DEVICE'
 topic_is = "TOPIC_TO_BE_USED"
 
