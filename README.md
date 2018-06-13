@@ -13,6 +13,7 @@ Repository of the basic code to be used for the lab session on MQTT at the Kobe 
 - [Lab 1: basic examples with MQTT](https://hackmd.io/s/SySWKp2AM)
 
 ## Thursday - June 14: 13:30-16:40
-- Intro to LoPy
-	* [PyCom devices basic HowTo](https://hackmd.io/s/HJhUcamxQ)
-- [Lab 2: sending data via MQTT to Ubidots](https://hackmd.io/s/Hke4Ya3Az)
+- [Lab 2, part A: using a cloud-based IoT repository](https://hackmd.io/s/Hke4Ya3Az)
+- Intro to LoPy devices
+  * reference: [PyCom devices basic HowTo](https://hackmd.io/s/HJhUcamxQ)
+- [Lab 2, part B: sending data via MQTT to Ubidots](https://hackmd.io/s/ry_TGIAxm)
